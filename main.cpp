@@ -6,14 +6,14 @@
 typedef std::map<unsigned int, std::string> CellStateASCIIMap;
 
 static CellStateASCIIMap asciimap = {
-  {State::DIRT, BROWN + std::string("&") + DEFAULT},
-  {State::GRASS, DARK_GREEN + std::string("#") + DEFAULT},
-  {State::WATER, BLUE + std::string("%") + DEFAULT},
-  {State::STONE, GRAY + std::string("0") + DEFAULT},
-  {State::PLANT_BUSH, GREEN + std::string("\"") + DEFAULT},
-  {State::PLANT_TREE, GREEN + std::string("¥") + DEFAULT},
-  {State::PLANT_FLOWER, DARK_RED + std::string("@") + DEFAULT},
-  {State::CRYSTAL, LIGHT_YELLOW + std::string("1") + DEFAULT}
+  {State::DIRT, "\e[38;5;130m" + std::string("&") + "\e[0;0m"},
+  {State::GRASS, "\e[38;5;76m"+ std::string("#") + "\e[0;0m"},
+  {State::WATER, "\e[38;5;45m" + std::string("%") + "\e[0;0m"},
+  {State::STONE, "\e[38;5;240m" + std::string("0") + "\e[0;0m"},
+  {State::PLANT_BUSH, "\e[38;5;100m" + std::string("\"") + "\e[0;0m"},
+  {State::PLANT_TREE, "\e[38;5;100m"+ std::string("¥") + "\e[0;0m"},
+  {State::PLANT_FLOWER, "\e[38;5;88m" + std::string("@") + "\e[0;0m"},
+  {State::CRYSTAL, "\e[38;5;190m"+ std::string("1") + "\e[0;0m"}
 };
 
 void printGrid(Grid &grid, int rows, int cols) {
