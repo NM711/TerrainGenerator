@@ -1,10 +1,11 @@
 #ifndef EC_AUTOMATA_HPP
 #define EC_AUTOMATA_HPP
 
+#include "./util/grid.hpp"
+#include "./util/seeder.hpp"
 #include <map>
 #include <random>
-#include "./util/seeder.hpp"
-#include "./util/grid.hpp"
+#include <set>
 
 struct NeighborSpecification {
     int start;
@@ -103,10 +104,14 @@ class ECAutomata {
   public:
     void virtual execute() = 0;
     void initGrid(int rowSize, int colSize, unsigned int popValue = 0);
+    /*
+      Adjustes grid and states based on a scale factor.
+    */
+
+    void setScaleFactor(float rfactor, float cfactor = 1.0f, std::set<unsigned int> *rareStateSet = nullptr);
 
   protected:
     Grid grid;
-    GridBuilder builder;
     Seeder seeder;
     NeighboringCellStateCount neighborStateCountMap;
 
@@ -123,22 +128,23 @@ class ECAutomata {
     */
 
     template <typename T> void pass(CustomGridRuleset<T> &ruleset) {
-      Grid freshGrid = this->builder.build();
-      for (int row = 0; row < this->builder.getRows(); ++row) {
-        for (int col = 0; col < this->builder.getCols(); ++col) {
+      std::vector<std::vector<int>> *freshGrid = this->grid.getContent();
+      for (int row = 0; row < this->grid.getRows(); ++row) {
+        for (int col = 0; col < this->grid.getCols(); ++col) {
           this->computeNeighbors({row, col}, this->neighborStateCountMap);
-          int current = this->grid.at(row).at(col);
-          int *update = &freshGrid.at(row).at(col);
+          int current = this->grid.getContent()->at(row).at(col);
+          int *update = &freshGrid->at(row).at(col);
           ruleset.apply(current, update, this->neighborStateCountMap);
           this->resetNeighborStateMap();
         };
       };
 
-      this->grid = freshGrid;
+      this->grid.setContent(*freshGrid);
     };
 
   private:
     NeighborhoodPosition neighborhoodPosition;
+
     void resetNeighborStateMap();
     /*
       Method that calculates the states of neighboring cells, from the provided row and col position in the grid.

@@ -80,6 +80,7 @@ class TerrainGenerator : public ECAutomata {
   */
     
   int seed();
+  
   void execute() override;
 
   

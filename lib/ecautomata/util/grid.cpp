@@ -1,23 +1,21 @@
 #include "./grid.hpp"
 
-void GridBuilder::setSize(int rows, int cols) {
-  this->rows = rows;
-  this->cols = cols;
-  this->grid = std::vector<std::vector<int>>(rows, std::vector<int>(cols, this->value));
+void Grid::setConfig(int rows, int cols, unsigned int initialPopValue) {
+  this->content = std::vector<std::vector<int>>(rows, std::vector<int>(cols, initialPopValue));
 };
 
-void GridBuilder::setPopValue(unsigned int value) {
-  this->value = value;
+void Grid::setContent(std::vector<std::vector<int>> content) {
+  this->content = content;
 };
 
-int GridBuilder::getRows() {
-  return this->rows;
+std::vector<std::vector<int>> *Grid::getContent() {
+  return &this->content;
 };
 
-int GridBuilder::getCols() {
-  return this->cols;
+int Grid::getRows() {
+  return this->content.size();
 };
 
-Grid GridBuilder::build() {
-  return this->grid;
+int Grid::getCols() {
+  return this->content.at(0).size();
 };

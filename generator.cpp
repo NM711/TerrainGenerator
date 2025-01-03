@@ -1,6 +1,5 @@
 #include "./generator.hpp"
 #include <random>
-
 // Simple terrain generator. I plan on making it a tool I can use in some side personal games. Still a work in progress
 // though. Multistate
 
@@ -66,7 +65,7 @@ Grid TerrainGenerator::getGrid() {
 };
 
 void TerrainGenerator::setGridDraw(void (*draw)(Grid &grid, int rows, int cols)) {
-    this->draw = draw;
+  this->draw = draw;
 };
 
 void TerrainGenerator::seed(int num) {
@@ -74,7 +73,7 @@ void TerrainGenerator::seed(int num) {
 };
 
 int TerrainGenerator::seed() {
-  return  this->seeder.setRandomSeed();
+  return this->seeder.setRandomSeed();
 };
 
 void TerrainGenerator::execute() {
@@ -84,7 +83,7 @@ void TerrainGenerator::execute() {
   for (int i = 0; i <= 500; ++i) {
 
     if (this->draw != nullptr) {
-      this->draw(this->grid, this->builder.getRows(), this->builder.getCols());
+      this->draw(this->grid, this->grid.getRows(), this->grid.getCols());
     };
 
     if (i < 499) {
@@ -106,23 +105,23 @@ void TerrainGenerator::execute() {
 };
 
 void TerrainGenerator::prepopulate() {
-  std::uniform_int_distribution<int> rowDistRange = std::uniform_int_distribution<int>(0, this->builder.getRows());
-  std::uniform_int_distribution<int> colDistRange = std::uniform_int_distribution<int>(0, this->builder.getCols());
+  std::uniform_int_distribution<int> rowDistRange = std::uniform_int_distribution<int>(0, this->grid.getRows());
+  std::uniform_int_distribution<int> colDistRange = std::uniform_int_distribution<int>(0, this->grid.getCols());
 
   for (int i = 0; i <= 10; ++i) {
     Position pos(this->seeder.getDistributionOutput(rowDistRange), this->seeder.getDistributionOutput(colDistRange));
-    if (pos.col > 1 && pos.col < this->builder.getCols() - 1 && pos.row > 1 && pos.row < this->builder.getRows() - 1) {
+    if (pos.col > 1 && pos.col < this->grid.getCols() - 1 && pos.row > 1 && pos.row < this->grid.getRows() - 1) {
       if (i < 6) {
-        this->grid.at(pos.row).at(pos.col) = State::WATER;
-        this->grid.at(pos.row).at(pos.col - 1) = State::WATER;
-        this->grid.at(pos.row).at(pos.col + 1) = State::WATER;
-        this->grid.at(pos.row - 1).at(pos.col - 1) = State::WATER;
-        this->grid.at(pos.row - 1).at(pos.col + 1) = State::WATER;
-        this->grid.at(pos.row + 1).at(pos.col - 1) = State::WATER;
-        this->grid.at(pos.row + 1).at(pos.col + 1) = State::WATER;
+        this->grid.getContent()->at(pos.row).at(pos.col) = State::WATER;
+        this->grid.getContent()->at(pos.row).at(pos.col - 1) = State::WATER;
+        this->grid.getContent()->at(pos.row).at(pos.col + 1) = State::WATER;
+        this->grid.getContent()->at(pos.row - 1).at(pos.col - 1) = State::WATER;
+        this->grid.getContent()->at(pos.row - 1).at(pos.col + 1) = State::WATER;
+        this->grid.getContent()->at(pos.row + 1).at(pos.col - 1) = State::WATER;
+        this->grid.getContent()->at(pos.row + 1).at(pos.col + 1) = State::WATER;
       } else {
-        this->grid.at(pos.row).at(pos.col) = State::STONE;
-        this->grid.at(pos.row).at(pos.col + 1) = State::STONE;
+        this->grid.getContent()->at(pos.row).at(pos.col) = State::STONE;
+        this->grid.getContent()->at(pos.row).at(pos.col + 1) = State::STONE;
       };
     };
   };

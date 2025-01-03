@@ -17,36 +17,20 @@ struct Position {
     };
 };
 
-typedef std::vector<std::vector<int>> Grid;
-
-class GridBuilder {
-  private:
-    Grid grid;
-    int rows;
-    int cols;
-    unsigned int value;
-
+class Grid {
   public:
     /*
-      Sets the rows and columns in our grid
-    */
-
-    void setSize(int rows, int cols);
-
-    /*
+      Sets the rows and columns in our grid and
       Initial element used to populate the grid columns.
     */
-
-    void setPopValue(unsigned int value);
-
+    void setConfig(int rows, int cols, unsigned int initialPopValue);
+    void setContent(std::vector<std::vector<int>> content);
+    std::vector<std::vector<int>> *getContent();
     int getRows();
     int getCols();
 
-    /*
-      Builds and returns grid
-    */
-
-    Grid build();
+  private:
+    std::vector<std::vector<int>> content;
 };
 
 #endif

@@ -20,7 +20,7 @@ void printGrid(Grid &grid, int rows, int cols) {
   system("clear");
   for (int row = 0; row < rows; ++row) {
     for (int col = 0; col < cols; ++col) {
-      int cell = grid.at(row).at(col);
+      int cell = grid.getContent()->at(row).at(col);
       auto iterator = asciimap.find(cell);
       if (iterator == asciimap.end()) {
         std::cout << "Given cell state of \"" << cell << "\" does not exist in the provided map!" << std::endl;
@@ -34,10 +34,11 @@ void printGrid(Grid &grid, int rows, int cols) {
   std::this_thread::sleep_for(std::chrono::milliseconds(5));
 };
 
+
 int main() {
   TerrainGenerator generator;
   generator.initGrid(36, 154, State::DIRT);
-  generator.seed();
+  int generatedSeed = generator.seed();
   generator.setGridDraw(printGrid);
   generator.execute();
 };

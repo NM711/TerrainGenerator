@@ -1,3 +1,4 @@
+
 # ECAUTOMATA - 2D Cellular Framework
 
 Small and extendable framework, that is meant to be used in order to speed up the development of cellular automata by offering
@@ -12,9 +13,17 @@ objects and functionality I have defined, alongside the documentation in the for
 
 ### Examples
 
-These are to be added soon, since I am currently building a project with this tool.
+Projects made with the tool.
 
-###### Compile
+##### Terrain Generator
+
+https://github.com/user-attachments/assets/b8eb0ab3-6e84-4589-b992-ab7c6e0cb0b7
+
+##### Christmas Tree
+
+https://github.com/user-attachments/assets/697087be-6e9f-43e6-96e5-b4b9e32af571
+
+### Compile
 
 ```
   g++ -c ./ecautomata.cpp ./util/seeder.cpp ./util/grid.cpp
