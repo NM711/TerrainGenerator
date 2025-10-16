@@ -1,4 +1,4 @@
-#include "./generator.hpp"
+#include "./core/generator.hpp"
 #include <chrono>
 #include <iostream>
 #include <thread>

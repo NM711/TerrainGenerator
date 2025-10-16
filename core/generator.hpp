@@ -1,7 +1,7 @@
 #ifndef ASCII_TERRAIN_GENERATOR_HPP
 #define ASCII_TERRAIN_GENERATOR_HPP
 
-#include "lib/ecautomata/ecautomata.hpp"
+#include "../lib/ecautomata/ecautomata.hpp"
 
 /*
   Rules:
