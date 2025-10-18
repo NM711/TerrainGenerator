@@ -1,5 +1,6 @@
 #include "./generator.hpp"
 #include <random>
+
 // Simple terrain generator. I plan on making it a tool I can use in some side personal games. Still a work in progress
 // though. Multistate
 
@@ -64,7 +65,7 @@ Grid TerrainGenerator::getGrid() {
   return this->grid;
 };
 
-void TerrainGenerator::setGridDraw(void (*draw)(Grid &grid, int rows, int cols)) {
+void TerrainGenerator::setGridDraw(std::function<void(Grid &grid, int rows, int cols)> draw) {
   this->draw = draw;
 };
 

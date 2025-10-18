@@ -1,6 +1,7 @@
 #ifndef ASCII_TERRAIN_GENERATOR_HPP
 #define ASCII_TERRAIN_GENERATOR_HPP
 
+#include <functional>
 #include "../lib/ecautomata/ecautomata.hpp"
 
 /*
@@ -55,8 +56,7 @@ class TerrainGenerator : public ECAutomata {
     Sets custom grid draw method to call.
   */
   
-  void setGridDraw(void (*draw)(Grid &grid, int rows, int cols));
-  
+void setGridDraw(std::function<void(Grid &grid, int rows, int cols)> draw);  
   /*
     Retreives the internal modified grid.
   */
@@ -85,7 +85,7 @@ class TerrainGenerator : public ECAutomata {
 
   
   private:
-    void (*draw)(Grid &grid, int rows, int cols);
+    std::function<void(Grid &grid, int rows, int cols)> draw;
 };
 
 
